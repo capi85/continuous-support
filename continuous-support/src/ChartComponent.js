@@ -1,6 +1,15 @@
 // src/ChartComponent.js
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    ArcElement,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+
+// Chart.jsのコンポーネントを登録
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ChartComponent = () => {
     const data = {
@@ -24,10 +33,26 @@ const ChartComponent = () => {
         ],
     };
 
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            tooltip: {
+                callbacks: {
+                    label: (tooltipItem) => {
+                        return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                    },
+                },
+            },
+        },
+    };
+
     return (
-        <div>
+        <div style={{ width: '400px', height: '400px' }}>
             <h2>My Doughnut Chart</h2>
-            <Doughnut data={data} />
+            <Doughnut data={data} options={options} />
         </div>
     );
 };

@@ -6,7 +6,7 @@ const App = () => {
     return (
         <div>
             <h1>My Chart</h1>
-            <ChartComponent />
+	    <ChartComponent />
         </div>
     );
 };
